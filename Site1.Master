@@ -1,0 +1,144 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="sweptwings.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+  <%-- <script type="text/javascript">
+
+         function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag) {
+            // the highlightStartTag and highlightEndTag parameters are optional
+            if ((!highlightStartTag) || (!highlightEndTag)) {
+                highlightStartTag = "<font style='color:blue; background-color:yellow;'>";
+                highlightEndTag = "</font>";
+            }
+
+            var newText = "";
+            var i = -1;
+            var lcSearchTerm = searchTerm.toLowerCase();
+            var lcBodyText = bodyText.toLowerCase();
+
+            while (bodyText.length > 0) {
+                i = lcBodyText.indexOf(lcSearchTerm, i + 1);
+                if (i < 0) {
+                    newText += bodyText;
+                    bodyText = "";
+                } else {
+                    // skip anything inside an HTML tag
+                    if (bodyText.lastIndexOf(">", i) >= bodyText.lastIndexOf("<", i)) {
+                        // skip anything inside a <script> block
+                        if (lcBodyText.lastIndexOf("/script>", i) >= lcBodyText.lastIndexOf("<script", i)) {
+                            newText += bodyText.substring(0, i) + highlightStartTag + bodyText.substr(i, searchTerm.length) + highlightEndTag;
+                            bodyText = bodyText.substr(i + searchTerm.length);
+                            lcBodyText = bodyText.toLowerCase();
+                            i = -1;
+                        }
+                    }
+                }
+            }
+
+            return newText;
+        }
+
+        function highlightSearchTerms(searchText, treatAsPhrase, warnOnFailure, highlightStartTag, highlightEndTag) {
+   
+            if (treatAsPhrase) {
+                searchArray = [searchText];
+            } else {
+                searchArray = searchText.split(" ");
+            }
+
+            if (!document.body || typeof (document.body.innerHTML) == "undefined") {
+                if (warnOnFailure) {
+                    alert("Sorry, for some reason the text of this page is unavailable. Searching will not work.");
+                }
+                return false;
+            }
+
+            var bodyText = document.body.innerHTML;
+            for (var i = 0; i < searchArray.length; i++) {
+                bodyText = doHighlight(bodyText, searchArray[i], highlightStartTag, highlightEndTag);
+            }
+
+            document.body.innerHTML = bodyText;
+            return true;
+        }
+
+ function searchPrompt(defaultSearchText,isPrompt,treatAsPhrase, textColor, bgColor) {--%>
+            <%--// we can optionally use our own highlight tag values--%>
+          <%--  if ((!textColor) || (!bgColor)) {
+                highlightStartTag = "";
+                highlightEndTag = "";
+            } else {
+                highlightStartTag = "<font style='color:" + textColor + "; background-color:" + bgColor + ";'>";
+                highlightEndTag = "</font>";
+            }
+
+            if (treatAsPhrase) {
+                promptText = "Please enter the phrase you'd like to search for:";
+            } else {
+                promptText = "Please enter the words you'd like to search for, separated by spaces:";
+            }
+            if (isPrompt)
+                defaultSearchText = prompt(promptText, defaultSearchText);
+
+            if (!defaultSearchText) {
+                alert("No search terms were entered. Exiting function.");
+                return false;
+            }
+
+            return highlightSearchTerms(defaultSearchText, treatAsPhrase, true, highlightStartTag, highlightEndTag);
+        }
+     </script>
+ <%-- 
+    <style type="text/css">
+        SPAN.searchword { background-color:yellow; }
+    </style>--%>
+    <%--<script src="http://www.tedpavlic.com/links/js/searchhi_slim.js" type="text/javascript"></script>--%>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body  style="background-color:#4472C4; font-family:Verdana;">
+   <%--onload="highlightText()"--%>
+    <form id="form1" runat="server">
+       <%-- <script type="text/javascript">
+        function highlightText() {
+            var textBox = document.getElementById('<%=searchText.ClientID%>');
+            if(textBox.value.length > 1) {
+                localSearchHighlight(textBox.value);
+            }
+        }
+    </script>--%>
+   
+            <div>
+            <div style="margin-left: auto; margin-right: auto; text-align: center; margin-bottom:10px; ">
+              <%--  <a href="login.aspx" 
+            <asp:Label ID="Label1" runat="server" Text="Aviation Photography" ForeColor="WhiteSmoke" Font-Bold="true"  Font-Size="34pt" Style=" text-decoration:none;" ></asp:Label>
+               </a>--%>
+                <asp:HyperLink ID="HyperLink1" runat="server" Font-Bold="true" Font-Size="34pt" ForeColor="WhiteSmoke" Style="text-decoration:none;" NavigateUrl="~/login.aspx" Text="Aviation Photography"></asp:HyperLink>
+                </div>
+            <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" ForeColor="#4472C4" Width="100%" Height="25px" BackColor="whitesmoke" pathseparator="|" Font-Bold="true"  >
+                <Items>
+                    <asp:MenuItem Text="Home - Last Uploads | " NavigateUrl="~/Default.aspx"></asp:MenuItem>
+                     <asp:MenuItem Text="Most Popular | " NavigateUrl="~/most_popular.aspx"></asp:MenuItem>
+                     <asp:MenuItem Text="Oldest Uploads | " NavigateUrl="~/oldest_upload.aspx"></asp:MenuItem>
+                      <asp:MenuItem Text="About | " NavigateUrl="~/about.aspx"></asp:MenuItem>
+                              <asp:MenuItem Text="Contact | " NavigateUrl="~/contact.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Useful Links | " NavigateUrl="~/usefullinks.aspx"></asp:MenuItem>
+                </Items>
+                            </asp:Menu>
+                 <div style="float:right; margin-top:-24px; z-index:1; position:relative; margin-right:2px;">
+        <asp:TextBox ID="searchText" runat="server" Width="300px"></asp:TextBox>
+        <asp:Button ID="btnSubmit" Text="Search" runat="server"
+            onclick="btnSubmit_Click"   />
+    </div>
+                </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+     
+        </asp:ContentPlaceHolder>
+
+    </form>
+</body>
+</html>
